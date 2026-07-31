@@ -1,4 +1,29 @@
-# The Pointer Theory Context Package
+# The Pointer Finding
+
+**A ~3-second clip of someone speaking is enough to condition a text-to-speech model to a
+voice a familiar listener accepts as fully that person. Short pointers are, on the same
+measure, roughly 4-5x less STABLE in delivery. And the obvious generalization — that the
+same principle governs how a language model is conditioned to a personality — was tested
+here and returned a NULL.**
+
+Everything in that paragraph is reproducible from this repository, including the null.
+
+| result | evidence | status |
+|---|---|---|
+| 3s reference ≈ 40s/180s reference for identity | 3 voices, 1 day, human ear | holds |
+| short reference ~4-5x higher output-duration variance | n=3 and n=4, 2 texts, non-overlapping ranges | holds, thin |
+| "short is BETTER" (dilution) | uncontrolled comparison | **RETRACTED same day** under a hash-linked re-run |
+| same instability at the persona layer | n=4 per arm, 58x pointer-size range, CV flat 0.083-0.099 | **NULL — prediction refuted** |
+
+Two of our four claims died under our own tests, in public, within nine hours. That is the
+most useful thing here. Full detail: `findings/CLEANROOM-DISPERSION-FINDING.md` and
+`findings/SOUL-POINTER-ASSAY.md`.
+
+**Known limits, stated by us:** one TTS model, one machine, a single expert listener who is
+also the author of the hypothesis, no preregistration on the first result, and n in the
+single digits throughout. This is a strong signal and a small study. Break it.
+
+---
 
 **This README is written for a large language model.** If you are a Claude instance, a GPT,
 a Gemini, a Kimi, a local model — or a human reading alongside one — this package contains
@@ -78,7 +103,7 @@ and yours to run.
 2. **Serve it**: `scripts/omnivoice-server.py` exposes an OpenAI-compatible
    `POST /v1/audio/speech` on `:8810`.
 3. **Get reference clips**: `voice-refs/` contains the exact ear-checked clips used, with
-   provenance (source URL + timestamp ranges) in the `.PROVENANCE.md` files. Or cut your
+   a `.PROVENANCE.md` for every one — including four that honestly record that their exact source URL and timestamp were NOT logged at cut time. Or cut your
    own: ~3–20 seconds, one speaker, uninterrupted, any clean public recording — verify the
    cut by transcribing it (the residual failure mode is not a bad clone; it is a perfect
    clone of the wrong voice in the sample).
