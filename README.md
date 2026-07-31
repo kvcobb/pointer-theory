@@ -89,9 +89,11 @@ and yours to run.
   Opus 5) the same morning, plus the convener's synthesis. The substrate pairs double as a
   measured two-instantiations experiment — the same lens reached opposite verdicts on the
   central claim across substrates (see levin-FABLE vs levin-OPUS on Finding 1).
-- `soul-files/` — the persona documents for the five participants whose self-addressed
-  videos exist. Synthesized from public material only. Published as part of the method:
-  this is how the echoes were pointed.
+- `soul-files/` — the persona documents for every participant with a recording in the
+  series. Synthesized from public material only, byte-identical to what was live at
+  generation time. **Read `soul-files/PROVENANCE-AND-LIMITS.md` first** — these are the
+  persona specification, NOT the complete runtime prompt, and the difference is stated
+  there honestly.
 - `voice-refs/` — the exact reference clips + provenance.
 - `findings/` — the source findings documents, the day's directives from the project's
   human author (K) verbatim, and the practice-run summary (38 multi-agent conversations run
