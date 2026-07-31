@@ -1,0 +1,45 @@
+{
+ "FULL": {
+  "n": 4,
+  "word_counts": [
+   402,
+   400,
+   491,
+   439
+  ],
+  "mean_words": 433,
+  "stdev_words": 36.9,
+  "cv": 0.085,
+  "within_arm_vocab_overlap": 0.208
+ },
+ "SHORT": {
+  "n": 4,
+  "word_counts": [
+   381,
+   436,
+   450,
+   371
+  ],
+  "mean_words": 409.5,
+  "stdev_words": 34.0,
+  "cv": 0.083,
+  "within_arm_vocab_overlap": 0.176
+ },
+ "MICRO": {
+  "n": 4,
+  "word_counts": [
+   319,
+   299,
+   357,
+   386
+  ],
+  "mean_words": 340.2,
+  "stdev_words": 33.6,
+  "cv": 0.099,
+  "within_arm_vocab_overlap": 0.199
+ },
+ "cross_arm_vocab_overlap_vs_FULL": {
+  "SHORT": 0.318,
+  "MICRO": 0.321
+ }
+}

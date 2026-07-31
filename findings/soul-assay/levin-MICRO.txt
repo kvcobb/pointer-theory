@@ -1,0 +1,75 @@
+What it suggests is that timbral identity and temporal behavior are separable in the model's representation space, and they have very different sample requirements.
+
+Three seconds is enough to nail the spectral fingerprint — formant structure, fundamental frequency distribution, vocal tract shape. That's what a familiar listener recognizes as "them." It's relatively invariant across a speaker's whole recording history, so a short clip captures it well.
+
+Pacing is something else entirely. It's a learned behavioral signature, not a physical property of the vocal tract. The model doesn't have enough constraint from 3 seconds to lock it in, so it fills from its prior over "how people talk in general" — which is why the wandering is plausible but not specifically them.
+
+The interesting implication: **what you're pointing at with the 3-second clip is the person's vocal geometry, not their rhythm**. The voice clone is a correct face wearing improvised body language.
+
+**What to measure next:**
+
+1. **The identity floor** — how short can the clip go before familiar-listener acceptance breaks? My guess: the floor is around 0.5–1s for timbral identity, but it'll be abrupt not gradual.
+
+2. **Stranger test** — does an unfamiliar listener also accept the 3s render at the same rate? If yes, the model is capturing something objectively real. If familiar listeners over-accept, they're pattern-completing from memory.
+
+3. **Pacing variance distribution** — run 20 renders from the same clip, measure inter-word timing CV. Is the distribution unimodal (pure noise) or multimodal (a few rhythm "modes")? Multimodal would mean the model has learned discrete speaking styles, not just a mean.
+
+4. **Anchor saturation curve** — does pacing variance decrease as clip length increases, and where does it plateau? That tells you the minimum clip length to capture someone's temporal signature, which is almost certainly much longer than 3 seconds.
+
+The pointer theory framing fits: 3 seconds is above the identity K-star but well below the style K-star.
+
+===== NEXT REPETITION =====
+
+The wandering-pacing-but-stable-identity result is the most interesting thing I've heard today, and it maps directly onto the pointer work.
+
+What it tells you: **identity and behavior live in different dimensions of the voice signal.** The 3-second clip is enough to nail the attractor — the formant ratios, fundamental frequency distribution, vocal tract shape — but it's underspecified on trajectory. So the model lands in the right basin every time but roams around inside it differently.
+
+That's the same structure as a sparse soul corpus. Enough to fix the identity manifold, not enough to constrain the path through it.
+
+**What I'd measure next:**
+
+1. **Where the cliff is below 3 seconds.** Is 2.5s still enough? 1.5s? Does recognition drop off gradually or is there a threshold? That's your K-star for voice — the minimum fragment from which the basin is recoverable.
+
+2. **Which acoustic dimensions are stable vs. wandering.** Formants stable, pacing wandering — probably. But what about breathiness, pitch *range* (vs. center), inter-word silence distribution? The stable ones are the pointer components. The wandering ones are the behavioral degrees of freedom the model is sampling.
+
+3. **Whether pacing variance is uniform or clustered.** If repeated renders cluster into 2-3 pacing "modes," that person has multiple attractors (fast/slow register). If it's uniform, it's pure model stochasticity — the identity is pinned but the timing is genuinely underdetermined.
+
+4. **Familiar vs. unfamiliar listener delta.** You said a *familiar* listener accepts it. What does an unfamiliar listener say? If they also accept it, the identity information is objectively encoded. If not, familiar listeners are partially completing from memory — which means the 3-second clip is a *joint* pointer (clip + listener's prior). That changes the architecture.
+
+The fourth one is the one that would reshape how I think about the whole thing.
+
+===== NEXT REPETITION =====
+
+What that tells me: voice identity is not in pacing. It's in something more stable — formant structure, voice quality (breathiness, resonance, the spectral envelope shape), and probably some micro-rhythmic signature that persists even when the model's duration head wanders. Pacing is the model's stochastic path through time; timbre is the constraint it can't escape because the reference clip hard-pins it.
+
+The 3-second sufficiency is more interesting. A familiar listener is bringing a pre-trained recognition model of that person — the TTS model only has to produce enough signal to *trigger* the listener's own completion. That's not the same as the output being accurate; it means the output clears a recognition threshold in a primed system. An unfamiliar listener might grade the same render differently.
+
+**What I'd measure next, in priority order:**
+
+1. **Separate pacing from timbre explicitly.** DTW-align two renders of the same text, same 3s clip. Compute spectral distance (MFCC or envelope) at aligned frames vs unaligned. Hypothesis: spectral distance is small and consistent; temporal distance is large and random. That would prove identity lives in timbre and the model is just noisy on duration.
+
+2. **Familiar vs unfamiliar listener delta on the same renders.** If familiar listeners accept and unfamiliar listeners don't, the 3-second clip isn't doing all the work — the listener's prior is doing some of it. That changes what you can claim about the model.
+
+3. **K-star ablation on clip length.** Go 3s → 2s → 1s → 0.5s. Find where familiar-listener acceptance breaks. That's the minimum viable pointer — the fractal minimum fragment that's still self-similar enough to regenerate identity.
+
+4. **Cross-phoneme generalization test.** Use a 3s clip of someone saying only vowel-heavy words, then render a sentence full of consonant clusters (and vice versa). Does the identity hold when the model has to generalize beyond the phoneme inventory in the pointer? If yes, the model extracted something deeper than phoneme-level copying.
+
+The soul-file parallel you've been drawing is exact: the 3s clip *is* the pointer. The render wanders in pacing the same way an LLM's generation wanders in cadence across turns — the pointer constrains *who*, not *how fast*.
+
+===== NEXT REPETITION =====
+
+The dissociation you're describing is the interesting signal. Three seconds is enough to capture the *identity layer* — timbre, formants, resonance profile — but not the *prosodic layer* — pacing, rhythm, stress distribution, inter-word silence patterns. The model reconstructs "who" but free-generates "how." That's why pacing wanders while recognizability holds: two separable things, captured at different data rates.
+
+The pointer analogy you named earlier is exact. A 3s clip is a sparse pointer — enough for the model to continue *from* the voice's acoustic state, but the trajectory (how that person actually moves through time when speaking) isn't in the clip. So it interpolates from whatever the training distribution suggests for "voices that sound like this," which is why repeated renders cluster differently but never fully converge.
+
+**What I'd measure next:**
+
+1. **Clip length vs. pacing variance curve** — 3s / 10s / 30s / 60s, same prompt, N renders each. Where does pacing variance start collapsing? That's the minimum viable pointer for the temporal layer. My guess: it doesn't collapse cleanly — prosody is too long-range — but there's a bend in the curve somewhere around 20-30s.
+
+2. **Render-to-render variance on identical input** — baseline stochasticity. How much of the pacing wander is clip-length and how much is just model temperature? Run 20 renders from the same 3s clip, measure standard deviation of duration, pause distribution, syllable rate.
+
+3. **Familiar listener discrimination threshold** — at what pacing divergence does a familiar listener start saying "that's not how they talk"? This gives you the tolerance band for the identity claim to hold. Someone who knows the person well has a much tighter band than a stranger.
+
+4. **Voice conversion vs. TTS generation** — take a render that "got the pacing right" and ask: can you transplant the identity onto it (voice conversion) while preserving that pacing? If yes, the two dimensions are fully separable in the model and you can pipeline them: generate pacing first (or lift it from a real sample), then apply identity. That's a much more controllable architecture than hoping the 3s clip enforces both.
+
+The soul-file parallel: a sparse soul corpus captures essence but not behavioral rhythm. The model continues from essence and free-generates the tempo. Same problem, same solution space — more pointer, or decouple the dimensions and control them separately.

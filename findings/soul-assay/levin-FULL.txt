@@ -1,0 +1,83 @@
+The split you're describing is real and points to something structurally interesting: voice identity and prosodic signature are separable, and they require very different amounts of data to capture.
+
+The 3-second sufficiency tells you that *who* a voice belongs to is encoded in stable, low-dimensional features — formant structure, vocal tract resonances, the harmonic texture, breathiness. Those are mostly anatomical and habitual. Three seconds of steady speech has enough phoneme coverage to anchor them. A familiar listener's recognition is predominantly running on that layer, and the model nails it fast.
+
+The pacing wander tells you the model has not captured *how* this person deploys their voice — speech rate as a function of thought complexity, pause placement, phrase-level rhythm, emotional register shifts. Those features have high variance even within a speaker and require temporal diversity across many contexts to characterize. Three seconds doesn't contain that diversity; it contains one mood, one rate, one state.
+
+So what you have is accurate acoustic identity plus underspecified prosody. The model fills the prosodic gap by sampling from a prior — probably something close to "neutral expressive speech for this vocal type" — and that prior wanders.
+
+**What I'd measure next:**
+
+1. **Pacing variance as a function of reference length** — extend from 3s to 10s, 30s, 3min, and track speech rate standard deviation across renders at each length. Find the inflection point where the wander collapses.
+
+2. **Identity vs. naturalness discrimination** — blind test with familiar and unfamiliar listeners, two separate questions: "same person?" and "does this sound natural for them?" My guess: recognition converges at 3s, naturalness discrimination requires much more — and *very* familiar listeners will notice prosodic wrongness faster, not slower, because they carry a richer internal model.
+
+3. **Feature stability audit** — force-align the renders, extract per-phoneme formants and F0 contours, measure within-render vs. across-render variance. You'll probably find formant structure nearly constant, F0 contour shape wandering considerably.
+
+4. **Register transfer** — if the clip is casual speech, does identity hold through a formal register, a whisper, an excited burst? The acoustic identity features should be register-invariant; the prosodic contamination from the training clip may not be.
+
+The deeper implication: what a familiar ear calls "that person's voice" is mostly the acoustic layer. What it calls "that person talking" requires the prosodic layer too. Three seconds is enough for the first. You probably need minutes of varied-context speech for the second.
+
+===== NEXT REPETITION =====
+
+What strikes me first: those two behaviors — recognizable voice, wandering pace — aren't in tension. They're sampling from different timescales of what speech *is*.
+
+A 3-second clip gives the model the **spectral fingerprint**: formant structure, harmonic ratios, breathiness, the resonance of that particular vocal tract. That's anatomical and habitual — it doesn't change much whether someone is nervous or confident or mid-sentence. The model is essentially doing style transfer at the timbral layer, and it turns out 3 seconds is plenty of signal for that because the signature repeats at the phoneme scale.
+
+But **pacing is a longer-timescale phenomenon**. It lives in phrase groupings, breath cadence, how someone accelerates through a clause they're confident about and slows for emphasis. 3 seconds might give you 1–2 breath groups — not enough to learn those habits. So the duration predictor is left relatively unconstrained by the reference clip, which means it's drawing from a prior that wanders stochastically. You get the texture right, the rhythm is improvised.
+
+What I'd measure next:
+
+**The variance decomposition.** Take N renders of the same text+clip and separate: timbre variance, pitch variance, pacing variance. My prediction is timbre variance is low (that's what the 3 seconds bought), pacing variance is high. Measuring *which dimension* the model is uncertain about tells you exactly what more reference audio would actually buy you.
+
+**Clip-pacing bleed-through.** Same person, two clips — one fast, one slow — same target text. Does the output pacing correlate with the clip? If yes, the model is extracting a rate estimate from the clip and using it loosely. If no, pacing is just free-running.
+
+**The inflection point curve.** Vary clip length from 1s to 30s, measure pacing variance per length. I'd expect spectral quality to plateau very fast (maybe 5s), but pacing variance probably doesn't stabilize until you have enough material covering natural phrase boundaries — my guess is 15–20s.
+
+The "familiar listener accepts it" criterion is doing a lot of work here too. Familiarity is what makes the spectral fingerprint sufficient — you're pattern-matching against stored expectations of that voice's texture, which the 3 seconds nails. An unfamiliar listener might accept *any* voice in that style class. So the real question is: what's the false-positive rate on the familiarity test?
+
+What's the specific model you're working with — OmniVoice's own inference, or something else? That'd change which of these is easiest to actually run.
+
+===== NEXT REPETITION =====
+
+What you're describing is a timbral-vs-temporal split, and it's not accidental — it's the actual structure of voice identity.
+
+The stable features (formant envelope, vocal tract resonances, fundamental frequency distribution, breathiness) are essentially anatomical. Three seconds captures them because they're not dynamic — they're the shape of the instrument, not the performance. The model encodes "this is who" in those features very quickly.
+
+Pacing is downstream of that, and it's genuinely stochastic in TTS — the model is sampling from a distribution of valid renderings conditioned on the identity features. Every render is a fair sample; none is wrong. The pacing wanders because pacing isn't in the 3-second pointer — it was never locked. What you're calling wandering, I'd call the model being honest about its uncertainty on a dimension you didn't constrain.
+
+The familiar listener finding this acceptable is also telling: the real person's pacing wanders too. Your prior on their voice is built on a distribution, so the output landing somewhere in that distribution reads as "them."
+
+**What I'd measure next:**
+
+1. **The K-star for voice identity** — shorten the clip systematically: 3s → 2s → 1s → 0.5s. At what length does listener recognition drop below chance? That's the minimum sufficient data to reconstruct the "generating rule" of that voice. Mandelbrot framing: identity is a rule, not an enumeration; what's the floor?
+
+2. **Pacing variance structure** — don't just note that pacing wanders; characterize the distribution. Does it cluster (most samples land near a modal tempo)? Is it uniform? Bimodal? If it clusters, the model has a learned prior on this person's tempo from other data or from the text prosody cues alone.
+
+3. **Identity vs. pacing independence** — hold the text constant, vary: (a) clip length, (b) clip excerpt chosen (beginning vs. middle of a phrase), (c) explicit prompt-side pacing instruction. Map which input axes move which output dimensions. If pacing is independent of clip selection, you've confirmed it's not encoded in the pointer at all.
+
+4. **The constraint experiment** — what happens when you provide a longer ref specifically chosen to contain a phrase that matches the target text's rhythm? Does pacing lock? This tells you whether the model is capable of temporal constraint from ref audio or only timbral constraint.
+
+The soul-pointer parallel you named is the load-bearing one: the LLM soul file is the exact same architecture. Enough text to capture the generating rule of a mind — the personality attractor, the reasoning signature, the emotional register — but the surface output (phrasing, specific word choices, response pacing) wanders on each sample, while a familiar reader still says "that's them." The minimum sufficient data is different (probably much larger for a mind than a voice), but the structure is identical.
+
+What you're really asking is: what IS a person, at the level of information? Both experiments point toward: a compact generating rule that produces recognizable outputs across samples, not a fixed enumeration of outputs.
+
+===== NEXT REPETITION =====
+
+What it tells me: identity is sparse in voice. Three seconds is enough to capture the acoustic signature — timbre, formants, fundamental frequency patterns, the resonance of the vocal tract — but not enough to capture *how* that person speaks. So what the model does is anchor to the identity-defining features (frozen, from the clip) and sample pacing/prosody from its learned prior (free, because the clip doesn't constrain it). That's why renders wander in timing while staying recognizably them. You're seeing two separate axes: identity vs. style.
+
+This maps exactly to what you said about the pointer. The 3-second clip is a pointer into voice-space. The model's weights carry the rest of the distribution. The clip just steers generation toward a basin the listener recognizes — the basin is wide enough that pacing can roam freely within it.
+
+**What I'd measure next:**
+
+The minimum viable clip. Sweep from 0.5s to 10s, repeated renders at each length, and have familiar listeners rate recognition. This is K* for voice — the critical fragment size below which the attractor basin can't hold.
+
+Whether pacing variance decreases with longer reference. If 30s of someone talking stabilizes the timing, that means pacing *is* encodable from clip data. If it doesn't, pacing is purely model-prior regardless of reference length — which would be a stronger claim about what's captured vs. generated.
+
+Spectral decomposition across repeated renders from identical clips. Which MFCCs are locked (identity) vs. variable (style)? This separates the frozen dimensions from the free ones empirically rather than by assumption.
+
+The familiarity variable specifically. An unfamiliar listener hearing the same renders — do they also accept them as "fully that person"? My guess: familiar listeners are doing something like pattern completion from a richer internal model. The 3-second clip triggers that model and the listener fills in the rest from memory, so they're partly hearing the real person, not just the render. Unfamiliar listeners might rate pacing variance as *wrong* rather than still-recognizable. That gap would tell you how much the recognition is happening in the model vs. in the listener.
+
+And the perturbation basin: gradually degrade the reference clip — add noise, pitch-shift it, time-stretch it — and find the point where the renders stop being recognized. That's measuring basin depth in voice-identity space, which is the same experiment Mandelbrot would want run before claiming self-similarity holds.
+
+The soul-file parallel holds cleanly. The 3-second clip is the minimum seed. The question is whether what the model reconstructs is actually that person's voice distribution or a plausible voice that the listener's memory completes into that person. Probably both, and the ratio depends on familiarity.
