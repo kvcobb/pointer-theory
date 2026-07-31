@@ -30,8 +30,17 @@ intersects ONLY the targeted speaker, uninterrupted — conditions voice synthes
 familiar listener as equal to conditioning on 40–180 seconds of the same person. Multiple
 non-overlapping short windows from the same recording produce near-indistinguishable
 results. Replicated across three voices in one day, including a difficult-accent case, at
-20s, 10s, and 3s. **Above the intersection threshold, reference duration carries no
-information in either direction.**
+20s, 10s, and 3s.
+
+**CORRECTED the same day by a clean-room test — read `findings/CLEANROOM-DISPERSION-FINDING.md`.**
+An earlier version of this README said reference duration "carries no information in either
+direction." That is false as written. Duration carries no information about *identity* —
+the finding above stands — but a 3-second pointer is **markedly less STABLE**: rendering
+identical text repeatedly, the short-pointer arm showed roughly 4-5x the standard deviation
+in output duration, replicated on two unrelated passages, with non-overlapping ranges. Short
+is sufficient to establish *who is speaking*; it is not equivalent in *how steadily* the
+speech is produced. A listener asked "does this sound like him" cannot detect this; only a
+judge-free measurement can.
 
 **A stronger claim we made and then RETRACTED the same day, recorded here because the
 retraction is part of the method:** an early comparison suggested long references sounded
