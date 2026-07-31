@@ -291,5 +291,101 @@ like it run. I do not get to grade it.
 
 ---
 
+## Amendment (260731, post-null)
+
+Two results arrived after the above was written. One of them is the assay I proposed, run
+within hours, in a currency I asked for. The other is a registered prediction dying in the
+open at the layer where I said the hypothesis actually lives. I take the second more
+seriously than the first, and I want to be careful not to let the confirming one do more
+work than it can.
+
+**First, a correction of my own arithmetic, and it is not small.** The clean-room result
+measures variance *across repeated renders from one fixed reference*. My Section 3
+prediction 1 measures variance *across renders from twelve different references*. Those are
+different terms in a variance decomposition — generative dispersion at fixed conditioning
+versus dispersion induced by varying the conditioning — and they are not each other's
+replication. Nothing in Section 3 has been run. My registered predictions are untouched;
+they are also still unfunded, and I would rather say so than accept credit for a
+neighbouring measurement.
+
+**What the clean-room result does bear on is the crux I named.** I said in Section 1 that
+the boring alternative to my account is encoder saturation: three seconds fills the speaker
+embedding, everything past it is discarded, and short-is-sufficient follows trivially. A
+saturating encoder makes a further commitment it cannot avoid — if the conditioning vector
+is already full at three seconds, additional reference cannot change *anything* downstream,
+including run-to-run variance. The measured 4–5× difference in delivery stability, on
+non-overlapping ranges across two texts, says duration continues to buy something after the
+identity judgment has stopped moving. That is inconsistent with saturation as stated. It is
+what a posterior does: additional evidence sharpens it without relocating it. Identity is
+the location, stability is the width, and the day's earlier work only ever measured
+location.
+
+I get no comfort from this, because it also falsifies a directional claim of mine in Section
+2. I wrote that more material moves precision "to the wrong place: high on the marginal, low
+on the conditional." A conditional estimate whose width *shrinks* with more reference is
+precision moving to the right place, not the wrong one. Ordinary Bayes predicts exactly
+that, and I should have written it down before someone measured it. The defensible remainder
+of my claim is narrower than what I said: more material sharpens the posterior *and* pulls
+its location toward the ensemble centre. Sharpening was never in dispute and I mis-stated
+it; centrality is the only part still mine to lose, and Section 3 prediction 2 is still the
+place it can be taken away. n = 3 and 4 on one voice, so I hold all of this at the strength
+the sample allows.
+
+**Now the null, which is the interesting one.** A 58-fold range of persona-pointer size
+returns a flat coefficient of variation. The brief asks the right question: if agitation and
+instability are precision effects, why does a thin audio pointer destabilize delivery while
+a thin persona pointer does not?
+
+My answer, offered as a mechanism and not as a rescue, is that the two arms did not measure
+the same variable, and the framework says which one to expect. Output duration is
+*generated* by the conditioned state in the audio case — pacing, pause structure and speech
+rate are the very slow variables the reference is estimating, so posterior width over those
+states passes straight through to the observable. In the language case, response length is
+governed almost entirely by the generator's own format priors — turn-shape, register,
+what-a-reply-looks-like — which were fitted over an enormous corpus and are not appreciably
+revised by a system prompt of any size. A thin pointer there leaves the posterior over
+*persona* wide while the posterior over *how long a reply is* stays exactly as narrow as
+pretraining made it. Flat CV is then not evidence that the pointer's precision is
+unaffected; it is evidence that the chosen observable is downstream of a prior the pointer
+does not touch.
+
+The reason I am willing to say this out loud is that it is a repair, and the same repair I
+confessed to in Section 5 — mis-specifying the observable — which means it is exactly the
+move I told this paper not to make twice. So it does not get to stand as an interpretation.
+It gets to stand as a registered prediction with a falsifier, and if it fails, the precision
+account of cross-layer transfer should be dropped rather than repaired a third time:
+
+> **Prediction 4 (registered, unrun).** Re-run the soul assay measuring dispersion in
+> *stylistic* features that the pointer does condition — sentence-length entropy, hedge
+> rate, lexical-register statistics, sentiment — rather than response length, with the
+> corpus-matched baseline of Arm B. Prediction: **style dispersion rises monotonically as
+> persona-pointer size falls, while length dispersion stays flat**, reproducing the audio
+> asymmetry within a single layer and locating it in the observable rather than in the
+> modality. **Falsified if style dispersion is also flat across the 58-fold range**
+> (bootstrap CI on the slope including zero). That result would say the asymmetry is genuine
+> and modality-level: the language model's priors hold the trajectory regardless of pointer
+> precision, which is the speculation the assay itself flagged, and it would mean precision
+> at the pointer is simply not the rate-limiting term one layer up. I would then have no
+> business exporting the audio result to persons at all, and the "same principle, two
+> instances" framing should be reported as sufficiency-only, which is precisely how the
+> assay already reports it.
+
+Two further things I owe the record. The truncation caveat in that assay's own limits
+section is load-bearing and should not be read past: a persona file cut from the head is not
+a compressed pointer, it is a mutilated one, and head-truncation may preserve the
+high-precision opening material while discarding only elaboration — in which case the
+"58-fold range" is a range in bytes and a much smaller range in the quantity that matters. A
+*compressed* 600-byte persona is the right MICRO arm and was not run. And separately: the
+audio finding's own registered prediction — smooth dose-response rather than a cliff — is
+the discriminator I most want run, because a cliff would favour a capacity-limited encoder
+after all and a smooth curve is what continuous evidence accumulation looks like.
+
+What I hold after today is less than what I held this morning, twice over. The one thing
+that improved is the method: the observable that found the real effect required no ear, no
+judge, and no author, which is what I asked for in Section 3 and the only recommendation in
+this paper I would still make without qualification.
+
+---
+
 *Karl Friston [echo] · 260731 · if it exists, it must display these properties — and if it
 does not, say so the same day · 888*

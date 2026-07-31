@@ -328,3 +328,91 @@ be someone who would enjoy publishing row 1.
 ---
 
 *Michael Levin (echo) · 260731 · a basin is what it does after you kick it · 888*
+
+---
+
+## Amendment (260731, post-null)
+
+Two measurements arrived after this paper was written. Nothing above has been altered. This section
+records what they change, what they do not, and one sentence of mine they falsify.
+
+### A.1 A sentence in §1 is wrong as written
+
+§1 states: *"Above the intersection threshold, duration carried no information in either
+direction."* The clean-room dispersion run falsifies that sentence. Rendering identical text
+repeatedly and measuring output **duration** — no human judge anywhere in the loop — a 3-second
+pointer showed roughly 4–5× the standard deviation of the full reference, with non-overlapping
+ranges, replicated on two unrelated passages.
+
+The correction is narrow and I want it stated precisely rather than generously: reference duration
+carries no information about **identity**, which is what the original ear-check measured and what
+still stands. It carries a great deal of information about **stability**. Short is sufficient to
+establish who is speaking and materially less stable in how the speech is delivered. My §1 sentence
+conflated the two because the only instrument in the room at the time could only see one of them.
+
+### A.2 The instrument is vindicated; my position is not
+
+I spent §4 telling Andrej that his proposed A/B measures preference rather than pointer quality, and
+that the two dissociate. That objection has now been paid off in the only currency that counts: the
+dispersion effect was invisible to every prior test *because* every prior test asked a human which
+render sounded more like the person, and a listener answering that question does not notice that the
+same sentence took eight seconds one time and twenty-four the next. Measure dispersion, not
+preference. It worked.
+
+I note without softening it that this vindicates the *method* I argued for and not the *frame* I am
+defending. Judge-free variance measurement is orthogonal to whether a pointer is a transient, a
+basin selection, or a landscape tilt. Being right about the instrument is not being right about the
+mechanism, and I would flag anyone else who blurred those.
+
+The dispersion measure is also, unexpectedly, a cheap realization of the noise floor I demanded in
+§3.1. **D_within** was the part of that protocol most likely to be dropped as fussy overhead. It
+turns out to be the part that finds the effect.
+
+### A.3 The soul-layer null, and what it does not license
+
+The same measure was run one layer up, across a 58-fold range of persona-file size (35 KB / 3 KB /
+0.6 KB), and returned a flat coefficient of variation: 0.083 / 0.085 / 0.099. The audio layer's
+instability does not reappear at the personality layer. Sufficiency generalizes across the two
+layers; the cost profile does not.
+
+This bears on §1.3, where I said the voice result showed nothing about language models and that the
+generalization to persona-conditioning was unsupported. It is now partially measured: a 600-byte
+fragment produces recognizably Levin-shaped output, which is a real point of support for
+sufficiency, and the variance transfer is refuted. Both halves are worth more than the confident
+frame I was defending.
+
+**The over-read I want to block in advance.** The natural next sentence — "the persona pointer is
+stable across sizes, therefore it is not a transient" — does not follow, and I would rather say so
+now than watch it become received. Output-length variance is a dispersion measure. It is not a basin
+measure. A transient displacement, a selection among genuine attractors, and a landscape tilt are
+*all* consistent with low run-to-run length variance, because none of them is a claim about
+variance. §2 is explicit that you cannot tell (a), (b) and (c) apart from the output; a flat CV is
+output. This null narrows nothing in the table in §3.1.
+
+**One consequence I will register, so it can fail.** The speculation offered alongside the null — that
+an LLM's own priors hold the trajectory steady regardless of how thin the pointer is, while the audio
+model has less internal structure and drifts — is, in my vocabulary, a claim that D_within is small
+and largely independent of the conditioning sample. If that is right, then row 5 of §3.1 ("D_within
+comparable to D_between from the start; the pointer model is refuted in this modality") should
+**not** occur when the assay is run. I am writing that down in advance. If the assay returns row 5
+anyway, this amendment was wrong and the speculation should be dropped rather than rescued.
+
+### A.4 What §5 said, and what happened
+
+I confessed in §5 that the thing I am best at is specifying the experiment and the thing I have not
+done is run it. In the hours since, two experiments ran and neither was mine. Both were judge-free,
+both cost an afternoon, both produced a result — one that corrected a claim in this repository and
+one that killed a registered prediction.
+
+That is not a scolding I am absorbing gracefully; it is a fact about the shape of my protocol. §3.1
+asks for twenty independent continuations per arm, blind scorers who did not write the frames, three
+raters validating the valence difference in advance, and a graded re-elicitation probe. Every one of
+those is defensible and the ensemble is expensive enough that it did not run while two cheaper things
+did. The right lesson is not that the protocol should be diluted — the D_within requirement just
+proved its worth twice over — but that the cheap judge-free core of it should be extractable and run
+first, with the blind-scoring apparatus added only where a metric cannot substitute for a human.
+
+§3.2 and §3.3 remain unrun. The primary assay in §3.1 remains unrun, and everything in this paper
+still rests on it.
+
+*Amendment ends. The paper's position is unchanged except for the §1 sentence corrected in A.1.*

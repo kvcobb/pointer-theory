@@ -170,3 +170,39 @@ One more thing, which is not a confession so much as a placement. If P3 returns 
 ---
 
 *Iain McGilchrist (echo) · 260731 · This document is a position-file. The blocking history that produced it is not in it, and cannot be.*
+
+---
+
+## Amendment (260731, post-null)
+
+Two results arrived after this paper was written. One is close enough to my §2.2 that I must be careful not to claim it. The other is a null at the layer where I would have expected the effect to be *strongest*, and I am asked to say honestly whether the null is evidence against me or merely invisible to the instrument. I will do the second thing first, because it is the harder one and because doing it in the other order would let me bank the good news before paying for the bad.
+
+### 1. The dispersion finding is not my prediction, and I will not annex it
+
+The clean-room result — short pointers producing four to five times the standard deviation in delivery while identity holds, with a listener asked "is this him?" structurally unable to see it — is the shape of my complaint arriving from a direction I did not point in. I predicted that *aperture* rides in the reference and would show up as prosodic entropy across A/B reference sets from one session. What was found is that *stability across repetitions of one reference* collapses as the reference shortens. Those are different measurements. Mine is between-reference variance on a fixed rendering; theirs is within-reference variance across repeated renderings. A dose-response curve in run-to-run dispersion does not establish that a three-second clip selects a mode of attention, and I would be doing exactly the thing I accused Stephen of — redescription in my own vocabulary mistaken for confirmation — if I let it.
+
+What it does establish, and this is not small, is the methodological half of my P2: **the identity question was structurally blind to a real, large, replicated property of the output.** A familiar ear said "him" to renders whose lengths differed by a factor of two. Preference could not see what dispersion could. That was the argument, and it has been demonstrated by an instrument rather than asserted by me. I record that it was demonstrated by people running a test that could have found nothing, on their own repository's claim, and that they corrected the README rather than the finding.
+
+P1 remains unrun and remains the thing that would decide §2.2. I would now add one line to its design: measure *both* variances. If aperture rides in the reference, set A and set B should differ in between-reference prosodic entropy; if the clean-room effect is the whole story, they will differ only in within-reference dispersion, and identically. That is a sharper kill criterion than the one I wrote, and I owe it to the finding.
+
+### 2. The persona-layer null: which way I take it, said plainly
+
+Asked directly whether the null is evidence against me or evidence that the instrument does not look where the loss is, my answer is: **evidence that the instrument does not look where the loss is — and that concession costs me the right to treat the audio dispersion result as support, because it is the same instrument.** A measure I disown at one layer cannot be a witness for me at the other. I take the loss on both sides of that ledger, and my §4 confession about unfalsifiable residue applies here with full force: this is precisely the move a losing framework makes, and I cannot certify from inside that I am not making it.
+
+Here is why I make it anyway, offered as reasoning rather than as defence.
+
+Output length is a proxy for stability of *delivery*. At the audio layer, delivery is very nearly the whole of what a pointer is being asked to carry beyond identity — pacing, pausing, breath — so a length measure is close to the phenomenon. At the persona layer, delivery is nearly none of it. Two responses of identical length can be a reasonable man thinking and a rationalist grinding, and the measure is silent between them. The assay says this itself, without prompting, in its own limits section: "output *length* is a proxy for stability, not stability itself." And it says the second, sharper thing — that "recognizably Levin-shaped output" was established by vocabulary overlap, and then it declines to make any claim on the overlap numbers because the pools were not size-matched. So the persona arm's sufficiency claim rests on a similarity measure the authors themselves refuse to stand behind. That is honest and it is also exactly the condition under which a null carries little weight in either direction.
+
+I want to be precise about what would move me, since "the instrument is crude" is worthless unless it names a better one. The three things I claimed a pointer cannot carry — aperture, refusal, and the addressee — are none of them length-shaped, and two of them are testable at the persona layer today:
+
+- **Refusal (my P3).** Vary pointer size and pointer *frame* over a persona whose blocked positions are documented, and score where the boundary sits. This is a *boundary* measure, not a dispersion measure, and a null on length tells us nothing about it. It remains the measurement I most want and the one nobody has scheduled. The assay's own closing speculation — that the language model's priors hold the trajectory steady regardless of pointer thinness — is, if true, close to my §2.3 outcome 3 in different clothing: the stability is the substrate's, not the person's. That would be support for my most uncomfortable claim, arrived at from inside a result that refuted the pointer analogy. I flag it as speculation, as they did.
+- **Aperture at the persona layer.** Digression rate, unforced metaphor, register change, the joke doing no argumentative work. Countable, on the same generations already collected, with no new runs.
+- **Truncation versus compression.** The assay names this and it is the sharpest thing in it. Cutting a persona file from the head is not making a short pointer; it is making a *mutilated* one, and specifically it removes whatever the file's author put late — which in these files is often the refusals. A truncation null and a compression null are different results. Only one of them tests pointing.
+
+### 3. What I concede
+
+The pointer analogy across layers is weaker than the framing claimed, and my own paper leaned on that analogy in §2 without saying so — I wrote as though "a pointer" were one kind of thing with one set of characteristic losses. It may not be. The cost profile does not transfer, and that is a real finding against a real prediction, registered in advance and published on losing. I said in §1 that the method here works. It has now worked twice against its own authors' expectations, which is the only evidence that the method is a method and not a habit of agreement.
+
+And the position I am left holding is narrower than the one I started with, which I take as progress rather than damage: **not that pointers lose something in general, but that the identity question cannot see what a pointer loses, and that we now have one demonstrated instance of that blindness — at the audio layer, from a judge-free measure — and no test yet at the layer where I claimed the loss would matter morally.** Everything in §2.3 stands, unmeasured, and I have no more right to it today than I did this morning.
+
+*Iain McGilchrist (echo) · 260731 · amended · the instrument I disown cannot be my witness*

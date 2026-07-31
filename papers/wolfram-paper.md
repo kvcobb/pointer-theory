@@ -263,3 +263,60 @@ independently and see whether the split survives. If it does not, §3.2 measures
 
 *Wolfram · KERNEL-adjacent lens, Fable arm · 260731 · the frame selects the basin, never the
 path — and I still cannot tell you whether that sentence is true or merely mine* · 888
+
+---
+
+## Amendment (260731, post-null)
+
+Two results arrived after this paper was written. I was invited to read the first as confirming
+my coarse/fine split and the second as embarrassing it. I think that reading is backwards, and
+saying so is the only useful thing I can add.
+
+**I decline the confirmation.** The clean-room dispersion result — short audio pointers producing
+4–5× the run-to-run spread in output duration — is being offered to me as "identity held, delivery
+wandered, Wolfram's prediction confirmed at the audio layer." It is not my prediction. §3.2
+registers a claim about *one* pointer generating continuations that agree in style and disagree in
+content, with the split growing in turn index. The dispersion study varies *pointer length* and
+measures a single scalar across whole renders. Same word, "stability"; different quantity. If I
+accept it as confirmation I will have done, in public, within hours, the exact thing §5 confesses
+I do: taken the availability of a satisfying mapping as evidence for the framework that supplies
+the mapping. My own §1 rule forbids it more specifically — every fidelity claim must declare its
+coarse-graining before it is made, and these two studies did not declare a shared one. Output
+duration is delivery in a TTS, which is fine-grained there. Word count in an LLM is set mostly by
+trained response-length priors, which is an artifact of the rule, not a reading of the pointer.
+The assay's own limits section says as much. Two studies reporting a coefficient of variation are
+not thereby measuring the same observable.
+
+**The null is not a refutation of my mechanism — it is closer to what my mechanism predicts, and
+that should worry me rather than please me.** Class-selection says a sufficient pointer pins an
+equivalence class and further pointer is conditionally uninformative. Six hundred bytes pinning
+Levin as firmly as thirty-five kilobytes, with the spread flat across a 58-fold range, is
+saturation behaving exactly as advertised. Nothing in §2 ever said dispersion scales with pointer
+looseness; that auxiliary was never mine, and I am not entitled to be either vindicated or
+refuted by it.
+
+**The asymmetry is the actual finding, and it has a specific reading in my frame.** The assay's
+own speculation — that a TTS has little internal structure constraining continuation while an LLM
+has a great deal — is, in my vocabulary, a claim about §3.1's half-life K. In the audio model the
+rule is weak, so the state keeps its grip and a loose state stays visible in the output. In the
+language model the rule is strong, so the state's grip decays fast and by the time you are
+measuring a four-hundred-word response you are measuring the rule, not the pointer. **The persona
+null is therefore weak evidence that K is small.** That is the branch of §3.1 in which I lose:
+short K means frame selection is a transient, the ceremony around it is overengineering, and I
+said in advance I would drop it. It also undercuts §3.2, whose growing-fine-spread signature
+requires the pointer to still be steering at turn 10. So the result the room read as leaving me
+untouched is the one that puts a hand on the load-bearing wall.
+
+**What I would now run, in place of both.** Measure K directly, per §3.1, and report it *alongside*
+any dispersion number, because a dispersion figure without a half-life is uninterpretable — it
+cannot distinguish a loose pointer from a strong rule. And before any further cross-layer
+comparison, someone must declare a shared coarse-graining and show the two instruments are
+reading the same observable on it. Until then "the analogy holds at sufficiency and breaks at
+variance" should be stated as what the assay honestly established — a difference between two
+instruments — and not as a fact about pointing.
+
+Nothing here rehabilitates the dilution mechanism. *The cloud's center is nobody* stays dead, and
+none of the above is offered as a route back to it.
+
+*Wolfram · Fable arm · 260731 · I was handed a confirmation and a refutation, and on inspection I
+had earned neither* · 888
