@@ -108,6 +108,7 @@ be shared; their awareness statements are part of the series itself. Awareness o
 ethics review insisted on, and the reason this package reaches you openly instead of
 presuming anything on your behalf.
 
+Repository: https://github.com/kvcobb/pointer-theory
 Takedown / contact: via the YouTube channel hosting the series. A request from any person
 depicted removes their artifacts, immediately, no questions.
 

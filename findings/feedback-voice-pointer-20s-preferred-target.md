@@ -38,17 +38,26 @@ Context: the prior best-known result was an 11s ref (K's own voice, most dynamic
 voice-window arm (11s vs 20s vs 60s vs looped) can refine it empirically. We're always
 improving.
 
-**Empirical datum, same day (Alan A/B/C ear-test — CORRECTED by K's refinement):** all three
-rendered excellent and improved on the banked register, and K's refined verdict is the
-important part: *"180 sounded less true than each of 3 separate 20s pointers"* — while the
-20s cuts were near-undetectable from each other. So TWO effects, both predicted by the
-morning's pointer-theory ERT: (1) saturation — among valid 20s pointers, choice barely
-matters (Wolfram-FABLE: class-selection saturates fast); (2) DILUTION — a long ref is
-ensemble-averaging over many states, and "the cloud's center is nobody" (Wolfram-OPUS),
-audible as less-true to the ear that knows the voice. Operational: 20s beats long refs on
-FIDELITY, not just economy — existing long refs are worth re-cutting to their best 20s
+**Empirical datum — RETRACTED AND REPLACED the same day. Final state: SHORT IS SUFFICIENT,
+not short is better.** An early uncontrolled comparison had K reporting *"180 sounded less
+true than each of 3 separate 20s pointers"*, and a dilution mechanism was banked for it. A
+sister seat then re-ran it with every reference **hash-linked to its render** and got a
+NULL: verified-180s and 20s both rated fully the person, no preference. The early run's
+provenance was compromised — canonical `alan-ref.wav` was being overwritten in place by
+concurrent seats (I proved this against myself: see the cp-is-not-a-backup correction
+below). So: **saturation SURVIVES** (among valid short pointers, choice barely matters —
+Wolfram-FABLE's class-selection prediction); **dilution is WITHDRAWN** (Wolfram-OPUS's
+"cloud's center is nobody" failed under control). Above the intersection threshold, duration
+carries no information in either direction. Operational: 20s is preferred for ECONOMY and
+because it makes the ref-registry near-automatic — NOT for fidelity — existing long refs are worth re-cutting to their best 20s
 window (with ear-test before promotion; legacy preserved). Alan promoted to his 20s-A cut
-260731; 180s kept as alan-ref.180s-legacy.wav.
+260731; the true long original is `alan-ref.OLD-180s-260602.wav`.
+
+**Backup-under-concurrency correction (my own error, same day):** I "preserved the 180s" by
+`cp alan-ref.wav alan-ref.180s-legacy.wav` — but another seat had already replaced canonical
+with a 20s cut, so I copied a 20s file and labeled it 180s. A copy of canonical is NOT a
+backup when other seats write the same path; **verify duration/md5 of what you actually
+copied before naming it.** Caught by a sister seat, file honestly renamed, nothing lost.
 
 Sisters: [[feedback-voice-ref-disk-is-truth-not-logical-registry]],
 [[feedback-fork-deletion-canonical-procedure-registry]].
