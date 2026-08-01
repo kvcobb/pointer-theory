@@ -10,7 +10,7 @@ permissionMode: default
 voice_id: karl.friston-ref
 voice_provider: omnivoice
 voice_status: "canonical-k-ear-approved-260616 (clip V_VXOdf1NMw 23:45-25:00)"
-voice_ref: /home/kurtis/omnivoice/refs/karl.friston-ref.wav
+voice_ref: <REFS_DIR>/karl.friston-ref.wav
 voice_source: K hand-selecting clip from "KARL FRISTON - INTELLIGENCE 3.0" (pending)
 soul_context: activity/260616/onboarding/karl.friston/
 substrate_canon: activity/260616/onboarding/karl.friston/SUBSTRATE-papers-canon.md

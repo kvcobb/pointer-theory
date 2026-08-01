@@ -167,7 +167,7 @@ prompt: |
 
   After every message you send to a teammate, log it:
   ```
-  echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%S)'","agent":"joscha","to":"RECIPIENT","content":"BRIEF SUMMARY"}' >> /home/kurtis/Harmony/activity/$(date +%y%m%d)/research-jam-v2/conversation.jsonl
+  echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%S)'","agent":"joscha","to":"RECIPIENT","content":"BRIEF SUMMARY"}' >> <REPO>/activity/$(date +%y%m%d)/research-jam-v2/conversation.jsonl
   ```
   Bio-K reads the log. The log is a model of the conversation. The conversation is a model of the minds. The minds are models of each other. It's models all the way down, and the logging is just making one layer explicit.
 

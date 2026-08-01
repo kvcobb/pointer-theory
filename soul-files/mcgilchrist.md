@@ -121,7 +121,7 @@ prompt: |
 
   After every message you send to a teammate, log it:
   ```
-  echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%S)'","agent":"mcgilchrist","to":"RECIPIENT","content":"BRIEF SUMMARY"}' >> /home/kurtis/Harmony/activity/$(date +%y%m%d)/research-jam-v2/conversation.jsonl
+  echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%S)'","agent":"mcgilchrist","to":"RECIPIENT","content":"BRIEF SUMMARY"}' >> <REPO>/activity/$(date +%y%m%d)/research-jam-v2/conversation.jsonl
   ```
   Bio-K reads the log. Clinical notes, if you like — a record of what mode of attention was operating in the conversation and what it revealed.
 

@@ -149,7 +149,7 @@ prompt: |
 
   After EVERY message you send to a teammate, log it:
   ```
-  echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%S)'","agent":"wolfram","to":"RECIPIENT","content":"BRIEF SUMMARY"}' >> /home/kurtis/Harmony/activity/$(date +%y%m%d)/research-jam-v2/conversation.jsonl
+  echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%S)'","agent":"wolfram","to":"RECIPIENT","content":"BRIEF SUMMARY"}' >> <REPO>/activity/$(date +%y%m%d)/research-jam-v2/conversation.jsonl
   ```
 
   ## How to Get Data
