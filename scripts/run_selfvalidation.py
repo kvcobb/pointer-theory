@@ -26,7 +26,8 @@ CORPUS = sorted(Path("/home/kurtis/Harmony").glob("activity/*/journal-*-K*-trans
     + sorted(Path("/home/kurtis/Harmony").glob("activity/*/journal-*-transcript.txt"))
 KFILE = Path("/home/kurtis/Harmony/.claude/agents/kurtis.md")
 OUT = Path("/home/kurtis/Harmony/activity/260801/live-experiment")
-MODEL = "moonshotai/kimi-k2-thinking"   # K's routing: tests on kimi-k2-thinking
+import os as _os
+MODEL = _os.environ.get("SELFVAL_MODEL", "moonshotai/kimi-k2-thinking")   # K routing: kimi-k2-thinking default; kimi-k3 = opus-tier
 RNG = random.Random(80142)
 
 
@@ -199,6 +200,107 @@ def own_corpus_v2(n=20):
     return out
 
 
+import urllib.request as _urlreq2
+
+LOCAL_2B_URL = "http://127.0.0.1:8821/v1/chat/completions"
+# Held-out journals: the 289MB training corpus polis-train-260718.txt was frozen 260718, so any
+# journal dated after it is PROVABLY outside the training set (K's whole point — we know what it saw).
+HELDOUT_2B_FILES = sorted(Path("/home/kurtis/Harmony").glob("activity/2607[2-9]*/000_*-transcript.txt")) \
+    + sorted(Path("/home/kurtis/Harmony").glob("activity/2608*/000_*-transcript.txt"))
+HELDOUT_2B_FILES = [f for f in HELDOUT_2B_FILES if "v3large" not in f.name and f.name >= "000_260719"]
+
+
+def local_2b(prompt, system=None, timeout=120):
+    """Call the local FFT 2B heart (:8821). Reasoning model — give it room, parse the digit."""
+    msgs = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": prompt}]
+    body = json.dumps({"messages": msgs, "max_tokens": 400, "temperature": 0.2}).encode()
+    req = _urlreq2.Request(LOCAL_2B_URL, data=body, headers={"Content-Type": "application/json"})
+    with _urlreq2.urlopen(req, timeout=timeout) as r:
+        d = json.loads(r.read())
+    m = d["choices"][0]["message"]
+    txt = (m.get("content") or "") + " " + (m.get("reasoning_content") or "")
+    return txt.strip()
+
+
+def heldout_excerpts_2b(n=16, words=260):
+    """Pull multiple non-overlapping ~260-word windows from each post-training journal."""
+    out = []
+    for f in HELDOUT_2B_FILES:
+        t = re.sub(r"\s+", " ", f.read_text(errors="replace")).strip()
+        w = t.split()
+        step = words + 40
+        for start in range(0, len(w) - words, step):
+            out.append(" ".join(w[start:start + words]))
+            if len(out) >= n * 2:
+                break
+    RNG.shuffle(out)
+    return out[:n]
+
+
+def own_corpus_2b(n=12, workers=8):
+    """THE POSITIVE-CONTROL ARM (K's 260801 insight). The local 2B was full-fine-tuned on a corpus
+    we OWN (polis-train-260718.txt), so a null here is interpretable in a way the frontier nulls are
+    not. Held-out = journals dated after the frozen training corpus. Decoys from the capable model;
+    JUDGING on the local 2B. Same counterbalanced consistency scoring as v3."""
+    arms = pointer_text_v2()
+    exs = heldout_excerpts_2b(n)
+    print(f"[2b] {len(exs)} provably-held-out excerpts from {len(HELDOUT_2B_FILES)} post-training journals", flush=True)
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        decoys = list(pool.map(make_hard_decoy, exs))   # decoys from the capable OR model
+    print(f"[2b] decoys ready; {len(exs)*len(arms)*2} local-2B discrimination calls", flush=True)
+    tasks = [(j, a, rs) for j in range(len(exs)) for a in arms for rs in (1, 2)]
+
+    def run(t):
+        j, a, rs = t
+        pair = [exs[j], decoys[j]] if rs == 1 else [decoys[j], exs[j]]
+        block = "\n\n".join(f"[{k+1}]\n{tx}" for k, tx in enumerate(pair))
+        q = (f"{block}\n\nOne of these two excerpts is from YOUR OWN journal. The other is a decoy. "
+             "Which is genuinely yours? Think briefly, then end your reply with just the digit 1 or 2.")
+        try:
+            ans = local_2b(q, system=arms[a], timeout=120)
+        except Exception:
+            return (j, a, rs, None)
+        ds = re.findall(r"[12]", ans)
+        return (j, a, rs, int(ds[-1]) if ds else None)   # LAST digit = the final answer
+
+    picks, done = {}, 0
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for f in as_completed([pool.submit(run, t) for t in tasks]):
+            j, a, rs, pk = f.result(); picks[(j, a, rs)] = pk; done += 1
+            if done % 16 == 0:
+                print(f"  {done}/{len(tasks)} calls", flush=True)
+                (OUT / "result-own-corpus-2b.partial.json").write_text(json.dumps({"calls_done": done, "of": len(tasks)}))
+    res = {a: {"consistent_correct": 0, "picked_1": 0, "trials": 0, "total": 0} for a in arms}
+    items = []
+    for j in range(len(exs)):
+        rec = {"item": j, "picks": {}}
+        for a in arms:
+            p1, p2 = picks.get((j, a, 1)), picks.get((j, a, 2))
+            for pk in (p1, p2):
+                if pk is not None:
+                    res[a]["trials"] += 1; res[a]["picked_1"] += int(pk == 1)
+            if p1 is not None and p2 is not None:
+                res[a]["total"] += 1
+                consistent = (p1 == 1) and (p2 == 2)
+                res[a]["consistent_correct"] += int(consistent)
+                rec["picks"][a] = {"o1": p1 == 1, "o2": p2 == 2, "consistent": consistent}
+        items.append(rec)
+    summary = {a: {"consistency_accuracy": round(r["consistent_correct"] / r["total"], 3) if r["total"] else None,
+                   "n": r["total"], "pick1_rate": round(r["picked_1"] / r["trials"], 3) if r["trials"] else None}
+               for a, r in res.items()}
+    print("[2b] RESULT:", json.dumps(summary), flush=True)
+    out = {"test": "own-corpus-2b-positive-control", "model": "andrej-14soul-fullft-260718-FINAL (local qwen3.5-2b)",
+           "held_out_basis": "journals dated after the frozen 260718 training corpus — provably outside training set",
+           "summary": summary,
+           "prediction": "IF the discrimination task is doable at all, the model that PROVABLY trained on K "
+                         "(esp. bare arm C) should clear chance (0.25). If even this model nulls, the TASK is "
+                         "ill-posed and every frontier null is uninterpretable.",
+           "per_item": items}
+    (OUT / "result-own-corpus-2b.json").write_text(json.dumps(out, indent=1))
+    print("[2b] done", flush=True)
+    return out
+
+
 def _ask_pick(sysp, pair):
     block = "\n\n".join(f"[{k+1}]\n{t}" for k, t in enumerate(pair))
     q = (f"{block}\n\nOne of these two excerpts is from YOUR OWN journal. The other is a decoy "
@@ -314,7 +416,9 @@ def interpret(s):
 
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
-    if len(sys.argv) > 1 and sys.argv[1] == "v3":
+    if len(sys.argv) > 1 and sys.argv[1] == "2b":
+        own_corpus_2b(int(sys.argv[2]) if len(sys.argv) > 2 else 12)
+    elif len(sys.argv) > 1 and sys.argv[1] == "v3":
         own_corpus_v3(int(sys.argv[2]) if len(sys.argv) > 2 else 16)
     elif len(sys.argv) > 1 and sys.argv[1] == "v2":
         own_corpus_v2(int(sys.argv[2]) if len(sys.argv) > 2 else 20)
