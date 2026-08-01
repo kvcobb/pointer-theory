@@ -26,40 +26,52 @@ model's knowledge — and for the local model, provably after its 260718 trainin
 | kimi-k2-thinking (weak) | 0.31 | 0.125 | 0.125 | 0.06 | 0.63 |
 | local qwen3.5-2b (trained on K, tiny) | 0.33 | 0.125 | 0.44 | 0.125 | 0.57 |
 
-## What this establishes
+## What this SUGGESTS (weakly — two data points and one model; do not over-read)
 
-1. **The full soul-file confers strong, specific self-recognition on a capable model.** 0.94
-   consistency (15/16), with a balanced 0.53 pick-1 rate — so it is real signal, not a position
-   artifact. And it is **K-specific**: 0.94 for K's file vs **0.56** for the wrong-person placebo
-   vs 0.14 bare. A capable model, given K's soul-file, reliably knows K's real held-out writing
-   from a good synthetic twin.
+The headline temptation is "the full soul-file reaches the person and 600 bytes doesn't." **We
+have not earned that sentence.** We tested exactly **two points** on the pointer-size axis — 600
+bytes and ~35 KB — on **one** capable model, at **n = 16**. From two points you cannot describe a
+curve. What the data actually shows, stated at the strength it deserves:
 
-2. **Capability gates the effect.** The two weak models null. The positive-control 2B — which
-   *provably* trained on K and can *generate* as K fluently ("a pattern extracted from over 1,500
-   of my own journals") — nonetheless cannot *pick* K. **Generation ≠ discrimination:** being
-   saturated with a voice shows up as producing it, not as the separate meta-cognitive skill of
-   judging "which of these is mine." So a null on a weak model is uninterpretable; only a capable
-   model's result speaks to the claim.
+1. **At one capable model, one large-ish pointer produced a strong K-specific signal.** kimi-k3
+   with K's ~35 KB file scored 0.94 consistency (15/16), balanced pick-1 rate 0.53 (not a position
+   artifact), and K-specific: 0.94 vs 0.56 for a wrong-person file vs 0.14 bare. That is a real,
+   position-controlled effect **for this one pointer on this one model** — nothing more yet.
 
-3. **The 600-byte pointer does NOT reach the person on the LLM side.** It nulls at chance on
-   every model, including the frontier one. This refutes the "a tiny pointer is sufficient"
-   sub-claim *for the mind/soul-file layer* — and is worth contrasting with the voice layer, where
-   ~3 seconds sufficed. The two layers are not symmetric: a voice pointer selects a vocal state; a
-   soul-file must carry enough pattern to individuate a person against a near-twin, and 600 bytes
-   does not.
+2. **Capability clearly gates whatever the effect is.** Weak models null; the positive-control 2B
+   *generates* as K fluently yet cannot *pick* K (generation ≠ discrimination). So weak-model
+   nulls are uninterpretable — only capable-model results speak to the claim.
 
-## What this does NOT establish (open, honest)
+3. **The 600-byte slice did not produce the effect** on any model. This does **not** mean "tiny
+   pointers can't work" — it means *this particular 600-byte slice* of this file didn't. Which
+   leads to the real caveats below.
 
-- **n = 16, one capable model, one design.** 0.94 is strong but needs replication (run twice),
-  more capable models, and larger n before it is a load-bearing claim.
-- **Decoy quality is the live confound.** If the hard decoys are systematically distinguishable
-  for a reason other than "not K" (a stylistic tell of the decoy-generator), the frontier model
-  could be exploiting that. A human-graded decoy-fairness check is required.
-- **A second, independent, judge-free measure is wanted.** A surprise / likelihood
-  (perplexity-conditioned-on-pointer) instrument would confirm 0.94 without any meta-cognition at
-  all. It is **parked**: the local server's completion endpoint returns logprobs only for
-  generated tokens, so a proper conditioned-perplexity build (llama-perplexity with teacher
-  forcing) is the next engineering task — not faked with a crude heuristic.
+## What this explicitly does NOT establish (K's corrections, on the record)
+
+- **Size is not information.** A 600-byte slice and a 35 KB slice differ in *what content* they
+  contain, not merely how much. The 600B arm is the first 600 bytes of the file — a specific,
+  possibly low-information slice — not "a small amount of the essence." Any size claim is
+  confounded with content until we control what's *in* each slice.
+- **~35 KB may be the LOWER bound, not the sufficient point.** We have no idea if going *bigger*
+  helps, plateaus, or hurts. The polis landing on ~20 KB soul-files may be an early happy accident,
+  not an optimum. We have not tested a single point above the full file, or between 600 B and 35 KB.
+- **n = 16, one model, one decoy-generator.** 0.94 needs replication (run twice), a second capable
+  model, larger n, and a human-graded decoy-fairness check (if the decoys carry a generator tell,
+  the model may be exploiting *that*, not recognizing K).
+- **We do not know much yet.** This is pilot data that rules out "the task is impossible" and
+  rules in "a large pointer on a strong model shows a real effect once." Everything about the
+  *shape* — where individuation switches on, whether it's monotonic in size or in specific
+  content, where the optimum is — is unmeasured.
+
+## The real next experiment (per K, 260801): the size×content titration
+
+Instead of two points, sweep the axis: many pointer sizes (600 B, 2 K, 5 K, 10 K, 20 K, 35 K, and
+**above** the full file by duplication/augmentation), AND vary *which content* fills a fixed size
+(first-N-bytes vs a curated high-signal slice vs random slice), across ≥2 capable models, with
+error bars. Only then can we say anything about whether it's size, content, or their interaction —
+and whether 20 K was luck or a real knee. A judge-free surprise/perplexity instrument (parked —
+needs a proper conditioned-perplexity build; the local server only returns logprobs for generated
+tokens) would confirm without meta-cognition.
 
 ## The correction, on the record
 
