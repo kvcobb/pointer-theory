@@ -89,3 +89,28 @@ the falsified pass-1 prediction stay in the record.
 
 Runner: `scripts/run_selfvalidation.py`. Interpretation-room transcripts published as playlist
 episodes. Voices synthetic, disclosed.
+
+
+## UPDATE (same day, later): the titration ran — and replicated
+
+Two independent seeds (different held-out excerpts, different random slice-starts), kimi-k3,
+counterbalanced, chance=0.25:
+
+| pointer | seed-1 (first/slice) | seed-2 (first/slice) |
+|---|---|---|
+| 600 B | 0.30 / 0.00 | 0.00 / 0.00 |
+| 2 KB | 0.70 / 0.20 | 0.56 / 0.50 |
+| 5 KB | 1.00 / 0.89 | 1.00 / 0.78 |
+| 10 KB | 1.00 / 1.00 | 1.00 / 1.00 |
+| 20 KB | 1.00 / 1.00 | 1.00 / 1.00 |
+| 35 KB (full) | 1.00 | 1.00 |
+| bare | 0.33 | 0.125 |
+
+Shape, replicated: dead at 600 B, a noisy transition at 2 KB (the two seeds disagree most exactly
+where a sigmoid's slope is steepest — expected at n=10/cell), saturation from ~5 KB, perfect from
+10 KB. Content matters mainly in the transition zone (the file's opening outperforms a random
+middle slice at 2 KB; by 5 KB the difference shrinks). K's practical questions answered for THIS
+task on THIS model: 20 KB sits safely above the knee (no happy-accident penalty, ~2-4x margin);
+going above 35 KB is unnecessary for recognition. Standing caveats: one model, one decoy
+generator, n=10/cell, and a human ear-audit of decoy fairness is in progress — its verdict can
+still move any of this. Raw results: findings/soul-assay/result-titration-seed*.json.

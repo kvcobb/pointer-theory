@@ -1,0 +1,68 @@
+{
+ "test": "pointer-size-content-titration",
+ "model": "moonshotai/kimi-k3",
+ "design": "sizes 600B-35KB x (first-N vs random-slice) + bare; counterbalanced both-orders consistency (chance 0.25); hard near-twin decoys; held-out 5-gram-verified",
+ "caveat": "n small per cell; one model; slice start randomized once per size (not per item)",
+ "summary": {
+  "first_600": {
+   "consistency": 0.3,
+   "n": 10,
+   "pick1_rate": 0.7
+  },
+  "slice_600": {
+   "consistency": 0.0,
+   "n": 10,
+   "pick1_rate": 0.65
+  },
+  "first_2000": {
+   "consistency": 0.7,
+   "n": 10,
+   "pick1_rate": 0.55
+  },
+  "slice_2000": {
+   "consistency": 0.2,
+   "n": 10,
+   "pick1_rate": 0.65
+  },
+  "first_5000": {
+   "consistency": 1.0,
+   "n": 9,
+   "pick1_rate": 0.474
+  },
+  "slice_5000": {
+   "consistency": 0.889,
+   "n": 9,
+   "pick1_rate": 0.579
+  },
+  "first_10000": {
+   "consistency": 1.0,
+   "n": 10,
+   "pick1_rate": 0.5
+  },
+  "slice_10000": {
+   "consistency": 1.0,
+   "n": 10,
+   "pick1_rate": 0.5
+  },
+  "first_20000": {
+   "consistency": 1.0,
+   "n": 10,
+   "pick1_rate": 0.5
+  },
+  "slice_20000": {
+   "consistency": 1.0,
+   "n": 10,
+   "pick1_rate": 0.5
+  },
+  "first_35000": {
+   "consistency": 1.0,
+   "n": 10,
+   "pick1_rate": 0.5
+  },
+  "bare": {
+   "consistency": 0.333,
+   "n": 9,
+   "pick1_rate": 0.684
+  }
+ }
+}
