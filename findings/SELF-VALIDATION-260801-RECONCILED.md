@@ -114,3 +114,17 @@ task on THIS model: 20 KB sits safely above the knee (no happy-accident penalty,
 going above 35 KB is unnecessary for recognition. Standing caveats: one model, one decoy
 generator, n=10/cell, and a human ear-audit of decoy fairness is in progress — its verdict can
 still move any of this. Raw results: findings/soul-assay/result-titration-seed*.json.
+
+## UPDATE 260802 — the be-K framing test (free, local): null
+
+Hypothesis (from K's "may need to be K to recognize"): the 2B's recognition null might be a
+PERSPECTIVE artifact — no first-person K-self to do the owning. Test: same counterbalanced
+scoring, but the model is placed inside K mid-entry and asked which candidate is its own
+thought continuing (decoy = real K-text from the wrong morning — same voice, harder than
+260801's decoys). Run twice on the local trained-on-K 2B at zero cloud cost.
+n=9 pilot: 0.333 (suggestive lift vs observer 0.125). n=30 replication: **0.200 — at chance.**
+The pilot lift was noise; the replication kills it. Verdict: first-person framing alone does
+NOT unlock self-recognition in the 2B — the capability wall stands. Implication for the next
+training round: if recognition is wanted in the small model, it likely must be TRAINED
+(first-person recognition exemplars in the corpus), not elicited by prompt perspective.
+Raw: findings/soul-assay/result-firstperson-2b.json.
