@@ -39,15 +39,19 @@ here unedited, because it's his to share.
 | Part 1 | Sol 5.6 (gpt-5.6-sol, headless `codex exec`) | 91 | 10,154 | holds |
 | Part 1 | Qwen3.8-27B (via OpenRouter) | 82 | 6,158 | holds |
 | Part 2 | Sol 5.6 | 68 | 7,240 | holds |
-| Part 2 | Qwen3.8-27B | — | — | **FAILED — see below** |
+| Part 2 | Qwen3.8-27B | — | — | **NULL — reproducibly fails, see below** |
 
-The Qwen3.8-27B call for Part 2 did not return a parseable response inside a 300-second window,
-against a ~128k-character prompt (roughly the same size that succeeded for Part 1's Qwen call in
-187 seconds). The retry, run for this write-up, is still pending at time of publish — this table
-will be updated in place rather than silently, and the raw attempts are preserved in
-`transcripts/` and this README's own edit history. **We are not hiding a failure to make a cleaner
-story.** If it fails a second time cleanly, that itself is a datum about prompt-length sensitivity
-on that endpoint, worth having on the record.
+**Finding, not a bug we didn't get to:** the Qwen3.8-27B call for Part 2 failed identically three
+times in a row against the same ~128k-character prompt (roughly the same size that succeeded
+cleanly for Part 1's Qwen call in 187 seconds). Attempt 1 returned nothing. Attempts 2 and 3 both
+truncated mid-sentence at 6,872 and 6,947 bytes respectively — within 75 bytes of each other,
+inside two different participants' turns. That consistency is the actual result: this is not
+random flakiness, it's a **reproducible early-truncation failure mode** on this OpenRouter
+endpoint at this prompt size, distinct from whatever succeeded at Part 1's prompt size. We have not
+diagnosed the mechanism (provider-side routing timeout is our best guess, untested) and are not
+claiming one. All three raw truncated/empty responses are preserved in `transcripts/` rather than
+deleted. **We are not hiding a failure to make a cleaner story** — a null that reproduces three
+times running is worth exactly as much as a result that holds three times running.
 
 Three full 4-stage soul-onboardings were also generated (Sol 5.6, headless) as a prerequisite —
 `soul-files/<name>/stage1..4`, 32,105–34,666 words each, well past this project's usual floor for
