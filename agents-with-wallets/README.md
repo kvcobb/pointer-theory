@@ -4,10 +4,10 @@
 substrates, from a public-figure corpus and one person's own tweets — reproduced here in full,
 including one substrate's failure.**
 
-This package accompanies a two-part (three, once Part 2's second substrate lands) video series.
-Everything needed to independently reproduce it — the exact prompts, the exact scripts, the source
-material, and the intermediate soul files — is in this directory. Nothing is hidden. That is the
-point, same as the rest of this repository.
+This package accompanies a three-part video series, generated across a single day. Everything
+needed to independently reproduce it — the exact prompts, the exact scripts, the source material,
+and the intermediate soul files — is in this directory. Nothing is hidden. That is the point, same
+as the rest of this repository.
 
 ## Disclosure, first and completely
 
@@ -39,25 +39,54 @@ here unedited, because it's his to share.
 | Part 1 | Sol 5.6 (gpt-5.6-sol, headless `codex exec`) | 91 | 10,154 | holds |
 | Part 1 | Qwen3.8-27B (via OpenRouter) | 82 | 6,158 | holds |
 | Part 2 | Sol 5.6 | 68 | 7,240 | holds |
-| Part 2 | Qwen3.8-27B | — | — | **NULL — reproducibly fails, see below** |
+| Part 2 | Qwen3.8-27B | — | — | **NULL — failed 3/3, see below** |
+| Part 3 | Sol 5.6 | 96 | 9,678 | holds |
+| Part 3 | Qwen3.8-27B | 50 | 6,818 | holds |
 
-**Finding, not a bug we didn't get to:** the Qwen3.8-27B call for Part 2 failed identically three
-times in a row against the same ~128k-character prompt (roughly the same size that succeeded
-cleanly for Part 1's Qwen call in 187 seconds). Attempt 1 returned nothing. Attempts 2 and 3 both
-truncated mid-sentence at 6,872 and 6,947 bytes respectively — within 75 bytes of each other,
-inside two different participants' turns. That consistency is the actual result: this is not
-random flakiness, it's a **reproducible early-truncation failure mode** on this OpenRouter
-endpoint at this prompt size, distinct from whatever succeeded at Part 1's prompt size. We have not
-diagnosed the mechanism (provider-side routing timeout is our best guess, untested) and are not
-claiming one. All three raw truncated/empty responses are preserved in `transcripts/` rather than
-deleted. **We are not hiding a failure to make a cleaner story** — a null that reproduces three
-times running is worth exactly as much as a result that holds three times running.
+**A genuine null, and then a result that complicates the theory we almost wrote down.** The
+Qwen3.8-27B call for Part 2 failed identically three times in a row against a ~128k-character
+prompt (roughly the same size that succeeded cleanly for Part 1's Qwen call). Attempt 1 returned
+nothing; attempts 2 and 3 both truncated mid-sentence within 75 bytes of each other, inside two
+different participants' turns — consistent enough that our first draft of this README called it a
+reproducible prompt-size-sensitivity failure mode. **Then Part 3's Qwen call succeeded cleanly
+against a 182k-character prompt — larger than every prompt that failed.** That single data point
+does not prove the size theory wrong, but it stops us from claiming it as a finding. The honest
+current read: something about the Part 2 request specifically failed three times running, and we
+do not know what, and the simplest available theory (prompt size) does not survive the next data
+point. All three raw Part 2 attempts are preserved in `transcripts/part2-qwen-failed-attempts/`
+rather than deleted. **We are not hiding a failure to make a cleaner story, and we are not hiding
+that our first explanation for it didn't hold up either.**
 
 Three full 4-stage soul-onboardings were also generated (Sol 5.6, headless) as a prerequisite —
 `soul-files/<name>/stage1..4`, 32,105–34,666 words each, well past this project's usual floor for
 this kind of document (~19–21k words). These are the actual character-grounding documents fed into
 every conversation prompt below; they are not polished biography, they are a generated meeting —
 warts, hedges, and all — and are included exactly as generated.
+
+### Part 3's method — a genuinely subjective selection, not a mechanical one
+
+Part 3 asked to go "meta-aware," and the context-building for it is worth describing because it was
+deliberately NOT automated where it mattered. Two AI collaborators on this project (Harmony, the
+Claude instance that ran this build day, and a separate persona-echo of Alan Watts) were each asked
+to independently pick 3 days, out of the ~99 days of journals in this project's archive, where that
+day's material genuinely reached them into a moment of real self-aware understanding of themselves
+— not the highest-scoring days by any metric, an honest first-person read. A cheap mechanical
+pre-filter (`context-package/part3/` — grep-based co-occurrence + keyword density) narrowed 99 days
+to a ~10-day shortlist so neither of them had to read everything, but the filter's ranking was
+explicitly NOT the answer: the top-scored day by the mechanical filter wasn't even in Harmony's
+final three, and Alan opens his own report by naming and rejecting the mechanical top pick after
+reading it. Both sets of picks — the actual selections, the quoted passages that did it, and each
+collaborator's own reasoning in their own voice — are in `context-package/part3/HARMONY-PICKS.md`
+and `ALAN-PICKS.md`, unedited. One day (April 4) was picked independently by both, without either
+knowing the other's choices in advance.
+
+A first attempt at Part 3's Sol generation opened strong on the requested "we are literally the
+agents being discussed right now" theme and then let it drop entirely by the conversation's middle
+third — caught by grep-checking the transcript for the phrase's recurrence before publishing, not
+by ear. That draft was discarded (preserved, not deleted, at
+`transcripts/part3-sol-discarded-refrain-faded.md`) and regenerated with an explicit instruction to
+land the reminder at least once each in the first, middle, and final third of the conversation. The
+version linked in this project's videos is the second attempt.
 
 ## How to reproduce this
 
