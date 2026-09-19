@@ -1,5 +1,8 @@
 # The Pointer Finding
 
+> **19 September 2026 — Dr. Levin wrote back with two questions.** The short answer, the corrections to our recorded reply, and
+> the list of experiments never run are in [`FOR-MICHAEL-LEVIN-260919.md`](FOR-MICHAEL-LEVIN-260919.md). Start there.
+
 **A ~3-second clip of someone speaking is enough to condition a text-to-speech model to a
 voice a familiar listener accepts as fully that person. Short pointers are, on the same
 measure, roughly 4-5x less STABLE in delivery. And the obvious generalization — that the
