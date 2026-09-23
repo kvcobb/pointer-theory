@@ -1,0 +1,40 @@
+{
+ "table": "1",
+ "seats": [
+  [
+   "kurtis",
+   "KURTIS-OPUS",
+   "Kurtis Cobb (K's echo)"
+  ],
+  [
+   "bill.maher",
+   "BILL-MAHER-OPUS",
+   "Bill Maher"
+  ],
+  [
+   "joscha",
+   "JOSCHA-OPUS",
+   "Joscha Bach"
+  ]
+ ],
+ "prompt_sha256": "a4bf8c75d84ec24956c9a8ef7f94c1dadcb2b24c617a36bb3a0fe4d882ab3625",
+ "prompt_words": 26639,
+ "inputs": {
+  "src1-scp.10232023-FreeWill.nas.txt": "c3b9553a7358cc1b478f464082581f1d9c6845b384c54f6114bfa9fda893df7b",
+  "src2-impact-theory-joscha-1h12-1h18.captions.txt": "f96f9e222f75d4a773ee5c33ab878906f75037d502064c3ca2fc921a4d0d4900",
+  "src3-scp.04162025.whisper-large-v3.txt": "ee8a447f0c569cfa552ed92db66123d6013ed7e09b40a749b4ecabd9115f3ddd",
+  "src4-scp.06202024.nas.txt": "b4235ff3cbc193c2342f64df49a3d09fa40ca2163be251273dd3ef017a466e01",
+  "K-13063.txt": "e44df5455232f8282dee9cccff3da2e641e84f2cd7a3616ec82cd33e990ee04a",
+  "K-13064.txt": "9f8026f8c6c6e3e2bbe9db04eb2a176cfc5c0bd9e5585732edb1c8b8a29dba51",
+  "K-13067.txt": "d9dbc22baa3cd91427db2d2a2f96456c1e02a668b28b10f93e86f1cfccf7670f",
+  "K-13071.txt": "006a56fea8923f77533da77d0a8f3f80d45b112338129fb5dd42077ff7e5aed9",
+  "K-13073.txt": "3e88dbb977a455d0f4599be8229aab713b050d77fdab1e89870b365016582904",
+  "K-13076.txt": "34b2a4391b2fcf9a732a44f9ff67935753fb750f35293ee4bd69c183adeab325"
+ },
+ "souls": {
+  "kurtis": "ea509b12bd482bff3aa054ca744a192096e37256e09e2be84777a28892e7b2b6",
+  "bill.maher": "13697105c8bc15d86eb20477219fddb7258a3981174b50834f06a4e82fd007b6",
+  "joscha": "be79e5efe99190535099e70ceb121ea28d247f0e716559b0101c3b29ae6ffdc5"
+ },
+ "builder_sha256": "59d530e5cac966be68ef88da6b448dd6ecd3742c0caa552635815ed4112c7d1b"
+}

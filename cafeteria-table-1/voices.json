@@ -1,0 +1,17 @@
+{
+ "_note": "Exactly what the 260923 render sent per speaker: ref_audio + pinned ref_text (null = none was sent; the server then auto-transcribes the reference). Other request fields: model=omnivoice, response_format=mp3, num_step=48, text chunked at sentence ends to <380 chars.",
+ "voices": {
+  "KURTIS-OPUS": {
+   "ref_audio": "voice-refs/kurtis-ref.wav",
+   "ref_text": "Well, and I was talking about simulation being a clunky word.  I just think that when humanity gets interesting enough cognitively to be able to describe at a granular level."
+  },
+  "BILL-MAHER-OPUS": {
+   "ref_audio": "voice-refs/bill.maher-ref.wav",
+   "ref_text": null
+  },
+  "JOSCHA-OPUS": {
+   "ref_audio": "voice-refs/joscha-ref.table1.wav",
+   "ref_text": "representations look like when you think about how you represent the interaction of us in this room yeah at some level you can the modalities are quite distinct they're not completely distinct but you can see this as vision you can close your eyes and then you don't see a lot anymore"
+  }
+ }
+}

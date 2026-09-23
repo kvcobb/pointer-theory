@@ -1,0 +1,21 @@
+{
+ "table": "1",
+ "authority": "K tg:13063/13064/13067/13071",
+ "model_requested": "claude-opus-5-5",
+ "prompt_sha256": "a4bf8c75d84ec24956c9a8ef7f94c1dadcb2b24c617a36bb3a0fe4d882ab3625",
+ "started_at": 1790184587.4016826,
+ "status": "COMPLETE",
+ "calls": 1,
+ "no_retry": true,
+ "subtype": "success",
+ "is_error": false,
+ "reported_models": [
+  "claude-opus-5-5"
+ ],
+ "output_tokens": 30512,
+ "response_sha256": "e88574043f826f4aca33da051c800ed8ecbd9634fca0e0039be86b34b98800a8",
+ "transcript_sha256": "72d49a9551e42fc2d9910412146bade70cf47e85ebe8d1ab27f1cdbbf87bc16b",
+ "draft_words": 13718,
+ "turns": 321,
+ "elapsed_s": 339.5
+}
